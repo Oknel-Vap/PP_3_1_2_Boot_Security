@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${user.getName()}">VALUE</title>
+  <style>
+    button {
+      background-image: linear-gradient(-48deg,#4b8aff,#407ef2);
+      background-size: 100% 100%,cover;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 56px;
+      height: 60px;
+      width: 360px;
+      margin-top: 30px;
+      text-align: center;
+      transition: all .3s;
+      cursor: pointer;
+    }
+    #submit {
+      background: green;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 56px;
+      height: 60px;
+      width: 360px;
+      margin-top: 30px;
+      text-align: center;
+      transition: all .3s;
+      cursor: pointer;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+    div {
+      width: 680px;
+      margin: 150px auto;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <form th:action="@{/admin/create}" th:object="${user}" method="POST">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br/><br/>
+    <label for="username">User Name</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="User Name">
+    <br/><br/>
+    <label for="name">First Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="First Name">
+    <br/><br/>
+    <label for="lastName">Last Name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    <br/><br/>
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="Password">
+    <br/><br/>
+    <label for="enabled">Enable</label>
+    <input type="checkbox" th:field="*{enabled}" id="enabled">
+    <br/><br/>
+    <label >Roles:
+      <select >
+        <option th:each="role: ${listRoles}" th:field="*{roles}"
+                th:value="${role.id}" th:text="${role.name}">  </option>
+      </select>
+    </label>
+
+    <br/><br/>
+
+    <input id="submit" type="submit" value="Create">
+
+  </form>
+  <a href="/admin">
+    <button>User's page</button>
+  </a>
+</div>
+</body>
+</html>

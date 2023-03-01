@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Admin|Spring Security</title>
+    <style>
+        button {
+            background-image: linear-gradient(-48deg,#4b8aff,#407ef2);
+            background-size: 100% 100%,cover;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 56px;
+            height: 60px;
+            width: 360px;
+            margin-top: 30px;
+            text-align: center;
+            transition: all .3s;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Admin, welcome to spring boot security page!</h1>
+<div style="margin: 150px auto; width: 600px">
+    <table th:border="1" th:cellpadding="2">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}">id</td>
+            <td><a th:href="@{/admin/edit/{id}(id=${user.getId()})}" th:text="${user.getName()}">name</a></td>
+            <td th:text="${user.getLastName()}">lastName</td>
+            <td th:text="${user.getUsername()}">username</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/" style="color: #fff;">
+        <button style="margin-top: 50px">Back to home page</button>
+    </a>
+    <a href="/admin/create" style="color: #fff; background: green">
+        <button style="margin-top: 50px">Create user</button>
+    </a>
+</div>
+<button type="button" th:onclick="|window.location.href='/logout'|">Log out</button>
+</body>
+</html>

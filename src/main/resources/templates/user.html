@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>User|Spring Security</title>
+    <style>
+        button {
+            background-image: linear-gradient(-48deg,#4b8aff,#407ef2);
+            background-size: 100% 100%,cover;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 56px;
+            height: 60px;
+            width: 360px;
+            margin-top: 30px;
+            text-align: center;
+            transition: all .3s;
+            cursor: pointer;
+        }
+        #submit {
+            background: darkred;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 56px;
+            height: 60px;
+            width: 360px;
+            margin-top: 30px;
+            text-align: center;
+            transition: all .3s;
+            cursor: pointer;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+        div {
+            width: 680px;
+            margin: 150px auto;
+        }
+    </style>
 </head>
 <body>
 <h1>User, welcome spring boot security page!</h1>
+<div>
+
+    <p th:text="'Id: ' + ${user.getId()}">VALUE</p>
+    <p th:text="'Name: ' + ${user.getName()}">VALUE</p>
+    <p th:text="'LastName: ' + ${user.getLastName()}">VALUE</p>
+    <p th:text="'Username: ' + ${user.getUsername()}">VALUE</p>
+
+    <button type="button" th:onclick="|window.location.href='/logout'|">Log out</button>
+</div>
 
 
 </body>
