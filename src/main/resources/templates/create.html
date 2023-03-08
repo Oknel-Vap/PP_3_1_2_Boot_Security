@@ -65,13 +65,10 @@
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password" placeholder="Password">
     <br/><br/>
-    <label for="enabled">Enable</label>
-    <input type="checkbox" th:field="*{enabled}" id="enabled">
-    <br/><br/>
     <label >Roles:
-      <select >
-        <option th:each="role: ${listRoles}" th:field="*{roles}"
-                th:value="${role.id}" th:text="${role.name}">  </option>
+      <select th:name="listRoles">
+        <option th:each="role: ${listRoles}"
+                th:value="${role.id}" th:text="${role.role_name}"> </option>
       </select>
     </label>
 

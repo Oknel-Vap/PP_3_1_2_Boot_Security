@@ -15,18 +15,18 @@
   <input type="text" th:field="*{lastName}" id="lastName"/>
   <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName error</div>
   <br/>
-  <br/>
   <label for="username">Логин: </label>
   <input type="text" th:field="*{username}" id="username"/>
   <div  style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
-
-  <input th:field="*{password}" id="password" type="hidden"/>
-
+  <br/>
+  <label for="password">Пароль: </label>
+  <input type = "text" th:field="*{password}" id="password"/>
+  <br/>
   <p>
     <label>Roles:
       <input type="checkbox" name="roles"
              th:each="role : ${allRoles}"
-             th:text="${role.name}"
+             th:text="${role.role_name}"
              th:value="${role.id}"
              th:field="*{roles}"
       />

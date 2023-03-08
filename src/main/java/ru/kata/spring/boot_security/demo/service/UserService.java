@@ -1,6 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,18 +12,21 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import java.util.Collections;
+
 import java.util.List;
+import java.util.Set;
+
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,14 +39,13 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public boolean saveUser(User user) {
+    public boolean saveUser(User user, Set<Role> listRoles) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
             return false;
         }
-
-        user.setRoles(Collections.singleton(new Role("ROLE_USER")));
+        user.setRoles(listRoles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
